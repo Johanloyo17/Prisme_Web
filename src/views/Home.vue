@@ -1,18 +1,38 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="exoBase">
+    <NavBar/>
+    <section class="bodyHome">
+      <section class="portade">
+        <h1>Lorem, ipsum dolor.</h1>
+      </section>
+    </section>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import NavBar from '../components/NavBar'
 export default {
-  name: 'home',
   components: {
-    HelloWorld
-  }
+    NavBar: NavBar
+  },
 }
 </script>
+
+
+<style lang="stylus">
+  @font-face {
+    font-family: bebas;
+    src: url(../assets/BebasNeue-Regular.ttf);
+    src: url(../assets/BebasNeue-Regular.otf);
+  }
+  body
+    font-family bebas
+  .exoBase
+    min-height 100vh
+    display grid
+    background-color lighten(grey, 40%)
+    grid-template-rows: 7vh auto;
+  .portade
+    height 100vh
+
+</style>
