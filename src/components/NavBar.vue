@@ -1,48 +1,86 @@
 <template>
-    <div class="navbar flex_y_center hover">
-        <div class="navbar_brand">Prisme</div>
+    <div class="navbar ">
+        <div class="navbar_brand">Page</div>
         <div class="navbar_items h-100 flex_y_center">
-            <span class="navbar_items_item">Servicios</span>
-            <span class="navbar_items_item">Proyectos</span>
-            <span class="navbar_items_item">Nosotros</span>
+            <span class="navbar_items_item color-sucess">service</span>
+            <span class="navbar_items_item">Proyect</span>
+            <router-link to="panel">
+                <span class="navbar_items_item">About us</span>
+            </router-link>
         </div>
+
+        <div class="navbar_actions" >
+            <router-link to="Register">
+                <el-button type="info" plain icon="el-icon-star-off">
+                    Register
+                </el-button>
+            </router-link>    
+            <router-link to="LogIn">
+                <el-button type="info" plain rounded>Log in</el-button>
+            </router-link>
+        </div>
+
     </div>
 </template>
 
 <script>
+// import firebase from 'firebase/app';
+// import 'firebase/auth'
+import firebase from 'firebase'
 export default {
-
+    data() {
+        return {
+            isUser:false
+        }
+    },
+    methods: {
+        
+    },
+    mounted() {
+        let isUser = firebase.auth().currentUser
+        console.log(isUser)
+        this.isUser = isUser
+    },
 }
 </script>
 
 <style lang="stylus" scoped>
     .navbar
+        grid-column: 1/3;
         padding 0 15px
-        background #ffffff
-        display flex
-        justify-content space-between
-        // position: fixed;
+        
+        box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
+        display grid 
+        grid-template-columns 3fr 3fr 4fr
+        // position: sticky;
         // top: 0;
-        // width: 100%;
-        // height: 7vh;
+        // left: 0;
+        // z-index: 999999;
+
+
         &_brand
             font-size: 2.6em;
+
         &_items
             display flex
             flex 0 0 50vw
             justify-content space-around
-            font-size: 1.25em;
+            font-size: 1.2em;
             &_item
                 height: 100%;
                 align-self: center;
                 display: flex;
                 align-items: center;
-                border-bottom: 2px transparent solid;
+                border-bottom: 4px transparent solid;
                 transition: all .35s ease-out;
                 cursor pointer
                 padding: 0 10px;
+                font-weight 500
                 &:hover
-                    border-bottom: 2px black solid;
-
-
+                    border-bottom: 4px black solid;
+        
+        &_actions
+            display flex
+            align-items center
+            justify-content flex-end
 </style>
