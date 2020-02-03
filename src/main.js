@@ -6,18 +6,20 @@ import Element from 'element-ui';
 import firebase from 'firebase'
 Vue.use(Element, { size: 'medium', zIndex: 3000 });
 
-Vue.config.productionTip = false
-// firebase.auth.onAuthStateChanged( )
-new Vue({
-  router,
-  render: h => h(App)
-}).$mount('#app')
+Vue.config.productionTip = false;
+firebase.auth().onAuthStateChanged( function (user) {  
+  new Vue({
+    router,
+    render: h => h(App)
+  }).$mount('#app')
+})
 
 
+//GUARDS BLOCK router
 router.beforeEach((to, from, next) => {
   let isUser = firebase.auth().currentUser;
-  let needAuth = to.matched.some(record => record.meta.needAuth)
-  
+  let needAuth = to.matched.some(record => record.meta.needAuth);
+
   if (needAuth && !isUser) {
     next('login')
     // console.log('necesitas credenciales')
@@ -34,6 +36,5 @@ router.beforeEach((to, from, next) => {
     // console.log('adelante')
     next()
   }
-  // console.log(needAuth)
   console.log(isUser)
-})
+});

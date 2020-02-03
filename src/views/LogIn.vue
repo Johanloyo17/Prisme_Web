@@ -1,11 +1,12 @@
 <template>
     <div>
-        <NavBar/> <!-- navbar Component -->    
-        <el-button primary plain="true" type="danger" 
-                > Salir
-        </el-button>
+        <NavBar/> <!-- navbar Component -->
 
         <div class="card-cont">
+            <el-button class="btn_exit" primary  type="danger"  @click="logOut()"
+                    > X
+            </el-button>
+
             <el-card shadow="hover">
                 <div class="app_title card-title">
                     <h2>Ingresar</h2>
@@ -64,9 +65,8 @@ export default {
                     .auth()
                         .signInWithEmailAndPassword(this.singInData.email, this.singInData.password)
                             .then( (user) => {
-                                alert('usuario conectado');
-                                console.log(user) ;
-                                this.$router.push('panel');
+                                this.$router.push({name:'panel'})
+                                
                             } ,(error) => console.error(error) );
             }
             else{
@@ -103,6 +103,7 @@ export default {
         display flex
         justify-content center
         align-items center
+        position relative
     .el-card
         flex 0 0 35%
     .action_form
@@ -113,5 +114,9 @@ export default {
             padding: 15px 0;
 .el-checkbox
     margin: 0 0 15px 0;
+.btn_exit
+    position absolute
+    top 5px
+    right 5px
 
 </style>
